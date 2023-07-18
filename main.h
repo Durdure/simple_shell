@@ -99,4 +99,8 @@ line_list *add_line_node_end(line_list **head, char *line);
 /* For READ_line.c */
 char *read_line(int *i_eof);
 
+/* SHELL_loop.c */
+void shell_loop(data_shell *datash);
+char *without_comment(char *in);
+
 #endif // MAIN_H
