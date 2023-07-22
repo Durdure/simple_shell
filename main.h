@@ -101,6 +101,45 @@ char *read_line(int *i_eof);
 
 /* SHELL_loop.c */
 void shell_loop(data_shell *datash);
-char *without_comment(char *in);
+char *without_comment(char in);
+
+/* get_L.c */
+ssize_t get_line(char **line_ptr, size_t *n, FILE *stream);
+void bring_line(char **line_ptr, size_t *n, char *buffer, size_t j);
+
+/* command_exect.c */
+int is_executable(data_shell *datash);
+int is_cdir(char *path, int *i);
+char *_which(char *cmd, char **_environ);
+int check_error_cmd(char *dir, data_shell *datash);
+int cmd_exec(data_shell *datash);
+
+/* command.c */
+void cd_to(data_shell *datash);
+void cd_previous(data_shell *datash);
+void cd_to_home(data_shell *datash);
+void cd_dot(data_shell *datash);
+
+/*COMMAND_shell.c*/
+int cd_shell(data_shell *datash);
+
+/* Get_ERROR.c */
+int get_error(data_shell *data_shell, int eval);
+
+/* AUX_H_1.C */
+void aux_hlp_exit(void);
+void aux_hlp_unsetenv(void);
+void aux_hlp_general(void);
+void aux_hlp_setenv(void);
+void aux_hlp_env(void);
+
+/* AUX_HE_2.c */
+void aux_hlp_alias(void);
+void aux_hlp_cd(void);
+void aux_hlp_env(void);
+
+/* GET_H.c */
+int get_hlp(data_shell *data);
+
 
 #endif // MAIN_H
