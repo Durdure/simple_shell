@@ -19,7 +19,7 @@ void aux_hlp(void)
  * aux_hlp_alias - Help information for the builtin alias.
  * Return: no return
  */
-void auxhelp_alias(void)
+void aux_hlp_alias(void)
 {
 	char *help = "alias: alias [-p] [name[=value]...]\n";
 

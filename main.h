@@ -100,7 +100,7 @@ line_list *add_line_node_end(line_list **head, char *line);
 char *read_line(int *i_eof);
 
 /* SHELL_loop.c */
-void shell_loop(data_shell *datash);
+void shell_loop(data_shell *data_sh);
 char *without_comment(char in);
 
 /* get_L.c */
@@ -108,20 +108,20 @@ ssize_t get_line(char **line_ptr, size_t *n, FILE *stream);
 void bring_line(char **line_ptr, size_t *n, char *buffer, size_t j);
 
 /* command_exect.c */
-int is_executable(data_shell *datash);
+int is_executable(data_shell *data_sh);
 int is_cdir(char *path, int *i);
 char *_which(char *cmd, char **_environ);
-int check_error_cmd(char *dir, data_shell *datash);
-int cmd_exec(data_shell *datash);
+int check_error_cmd(char *dir, data_shell *data_sh);
+int cmd_exec(data_shell *data_sh);
 
 /* command.c */
-void cd_to(data_shell *datash);
-void cd_previous(data_shell *datash);
-void cd_to_home(data_shell *datash);
-void cd_dot(data_shell *datash);
+void cd_to(data_shell *data_sh);
+void cd_previous(data_shell *data_sh);
+void cd_to_home(data_shell *data_sh);
+void cd_dot(data_shell *data_sh);
 
 /*COMMAND_shell.c*/
-int cd_shell(data_shell *datash);
+int cd_shell(data_shell *data_sh);
 
 /* Get_ERROR.c */
 int get_error(data_shell *data_shell, int eval);
@@ -139,7 +139,12 @@ void aux_hlp_cd(void);
 void aux_hlp_env(void);
 
 /* GET_H.c */
-int get_hlp(data_shell *data);
+int get_hlp(data_shell *data_sh);
 
+/* AUX_ERROR.c */
+char *error_get_cd(data_shell *data_sh);
+char *error_not_found(data_shell *data_sh);
+char *strcat_cd(data_shell *, char *, char *, char *);
+char *error_exit_shell(data_shell *data_sh);
 
 #endif // MAIN_H
