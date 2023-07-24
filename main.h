@@ -175,10 +175,18 @@ int ex_line(data_shell *data_sh);
 int command_sh(data_shell *data_sh);
 
 /* AUXILIARY_STRING.c */
-int _strcmp(char *s1, char *s2);
-char *_strchr(char *s, char c);
-char *_strcat(char *dest, const char *src);
-char *_strcpy(char *dest, char *src);
-int _strspn(char *s, char *accept);
+int _str_cmp(char *s1, char *s2);
+char *_str_chr(char *s, char c);
+char *_str_cat(char *dest, const char *sourc);
+char *_str_cpy(char *dest, char *sourc);
+int _str_spn(char *s, char *accpt);
+
+/* AUXILIARY_STRING_1.c */
+int cmp_chars(char str[], const char *dl_meter);
+int _isdigit(const char *s);
+char *_strtok(char str[], const char *dl_meter);
+int _strlen(const char *s);
+char *_strdup(const char *s);
+
 
 #endif
