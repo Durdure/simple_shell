@@ -90,13 +90,13 @@ typedef struct line_list_s
 	struct line_list_s *next;
 } line_list;
 
-// For AUXILIARY_list.c
+/* AUXILIARY_list.c */
 void free_sep_list(sep_list **head);
 void free_line_list(line_list **head);
 sep_list *add_sep_node_end(sep_list **head, char sep);
 line_list *add_line_node_end(line_list **head, char *line);
 
-/* For READ_line.c */
+/* READ_line.c */
 char *read_line(int *i_eof);
 
 /* SHELL_loop.c */
@@ -120,8 +120,12 @@ void cd_previous(data_shell *data_sh);
 void cd_to_home(data_shell *data_sh);
 void cd_dot(data_shell *data_sh);
 
-/*COMMAND_shell.c*/
+/* COMMAND_shell.c */
 int cd_shell(data_shell *data_sh);
+
+/*  AUXILIARY_LIST_1.c */
+void free_rvar_list(r_var **head);
+r_var *add_rvar_node(r_var **head, int lvar, char *var, int lval);
 
 /* Get_ERROR.c */
 int get_error(data_shell *data_shell, int eval);
@@ -147,4 +151,34 @@ char *error_not_found(data_shell *data_sh);
 char *strcat_cd(data_shell *, char *, char *, char *);
 char *error_exit_shell(data_shell *data_sh);
 
-#endif // MAIN_H
+/*  AUX_ERROR_2.c */
+char *error_syntax(char **args);
+char *error_permission(char **args);
+char *error_env(data_shell *datash);
+char *error_get_alias(char **args);
+char *error_path_126(data_shell *datash);
+
+/* environ_1.c */
+int _env(data_shell *data_sh);
+char *get_env(const char *name, char **environ);
+
+/* environ_2.c */
+void set_env(char *name, char *value, data_shell *data_sh);
+int _setenv(data_shell *data_sh);
+char *copy_info(char *name, char *value);
+int _unsetenv(data_shell *data_sh);
+
+/* ex_line.c */
+int ex_line(data_shell *data_sh);
+
+/* command_sh.c */
+int command_sh(data_shell *data_sh);
+
+/* AUXILIARY_STRING.c */
+int _strcmp(char *s1, char *s2);
+char *_strchr(char *s, char c);
+char *_strcat(char *dest, const char *src);
+char *_strcpy(char *dest, char *src);
+int _strspn(char *s, char *accept);
+
+#endif
