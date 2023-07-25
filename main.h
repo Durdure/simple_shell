@@ -38,7 +38,7 @@ typedef struct sep_list_s
 typedef struct builtin_s
 {
 	char *name;
-	int (*data_type_f)(data_shell *datash);
+	int (*data_type_f)(data_shell *data_sh);
 } builtin_t;
 
 /**
@@ -47,6 +47,7 @@ typedef struct builtin_s
  * @val: value of the variable
  * @len_val: length of the value
  * @next: next node
+ *
  * Explanation: single linked list which store variables
  */
 typedef struct r_var_list
@@ -191,8 +192,8 @@ char *_strdup(const char *s);
 /* SPLIT.C */
 char *swap_char(char *input, int bool);
 void add_nodes(sep_list **head_s, line_list **head_l, char *input);
-void go_next(sep_list **list_s, line_list **list_l, data_shell *datash);
-int split_commands(data_shell *datash, char *input);
+void go_next(sep_list **list_s, line_list **list_l, data_shell *data_sh);
+int split_commands(data_shell *data_sh, char *input);
 char **split_line(char *input);
 
 /* AUXILIARY_stdlib.c */
