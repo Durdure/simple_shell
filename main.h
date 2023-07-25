@@ -188,5 +188,16 @@ char *_strtok(char str[], const char *dl_meter);
 int _strlen(const char *s);
 char *_strdup(const char *s);
 
+/* SPLIT.C */
+char *swap_char(char *input, int bool);
+void add_nodes(sep_list **head_s, line_list **head_l, char *input);
+void go_next(sep_list **list_s, line_list **list_l, data_shell *datash);
+int split_commands(data_shell *datash, char *input);
+char **split_line(char *input);
+
+/* AUXILIARY_stdlib.c */
+int _atoi(char *s);
+char *aux_itoa(int m);
+int get_len(int n);
 
 #endif
