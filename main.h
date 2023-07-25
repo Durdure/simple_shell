@@ -200,4 +200,15 @@ int _atoi(char *s);
 char *aux_itoa(int m);
 int get_len(int n);
 
+/* syntax_error_checking.c */
+int error_sep_op(char *input, int i, char last);
+int check_syntax_error(data_shell *datash, char *input);
+void print_syntax_error(data_shell *datash, char *input, int i, int bool);
+int first_char(char *input, int *i);
+int repeated_char(char *input, int i);
+
+
+/* AUX_memory.c*/
+
+
 #endif
