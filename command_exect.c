@@ -205,4 +205,3 @@ int cmd_exec(data_shell *data_sh)
 	data_sh->status = state / 256;
 	return (1);
 }
-
