@@ -16,13 +16,14 @@
 #define TOK_BUFSIZE 128
 #define TOK_DELIM " \t\r\n\a"
 
+/* Points to an array of pointers to strings called the "environment" */
 extern char **environ;
 
 /**
  * struct sep_list_s - single linked list
  * @separator: ; | &
  * @next: next node
- * Explanation: linked list to store separators
+ * Description: linked list to store separators
  */
 typedef struct sep_list_s
 {
@@ -33,12 +34,12 @@ typedef struct sep_list_s
 /**
  * struct builtin_s - Builtin struct for command args.
  * @name: The name of the command builtin i.e cd, exit, env
- * @data_type_f: data type pointer function.
+ * @f: data type pointer function.
  */
 typedef struct builtin_s
 {
 	char *name;
-	int (*data_type_f)(data_shell *data_sh);
+	int (*f)(data_shell *data_sh);
 } builtin_t;
 
 /**
@@ -47,8 +48,7 @@ typedef struct builtin_s
  * @val: value of the variable
  * @len_val: length of the value
  * @next: next node
- *
- * Explanation: single linked list which store variables
+ * Description: single linked list which store variables
  */
 typedef struct r_var_list
 {
@@ -61,7 +61,7 @@ typedef struct r_var_list
 /**
  * struct data - struct which contains all relevant data on runtime
  * @args: tokens of the command(cmd) line
- * @stat: last status of the shell
+ * @status: last status of the shell
  * @count: lines counter
  * @_environ: variable of the environment
  * @av: argument vector
@@ -71,7 +71,7 @@ typedef struct r_var_list
 typedef struct data
 {
 	char **args;
-	int stat;
+	int status;
 	int count;
 	char **_environ;
 	char **av;
@@ -91,11 +91,15 @@ typedef struct line_list_s
 	struct line_list_s *next;
 } line_list;
 
-/* AUXILIARY_LIST.c */
+/* AUX_lISTS.c */
 void free_sep_list(sep_list **head);
 void free_line_list(line_list **head);
 sep_list *add_sep_node_end(sep_list **head, char sep);
 line_list *add_line_node_end(line_list **head, char *line);
+
+/* AUX_LISTS_1.c */
+void free_rvar_list(r_var **head);
+r_var *add_rvar_node(r_var **head, int lvar, char *var, int lval);
 
 /* READ_line.c */
 char *read_line(int *i_eof);
@@ -123,10 +127,6 @@ void cd_dot(data_shell *data_sh);
 
 /* COMMAND_shell.c */
 int cd_shell(data_shell *data_sh);
-
-/* AUXILIARY_LIST_1.c */
-void free_rvar_list(r_var **head);
-r_var *add_rvar_node(r_var **head, int lvar, char *var, int lval);
 
 /* Get_ERROR.c */
 int get_error(data_shell *data_shell, int eval);
