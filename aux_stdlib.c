@@ -29,12 +29,12 @@ int get_len(int n)
 }
 /**
  * aux_itoa - function converts int to string.
- * @m: type int number
+ * @n: type int number
  * Return: String.
  */
-char *aux_itoa(int m)
+char *aux_itoa(int n)
 {
-	unsigned int m1;
+	unsigned int n1;
 	int lenght = get_len(n);
 	char *buffer;
 
@@ -44,23 +44,23 @@ char *aux_itoa(int m)
 
 	*(buffer + lenght) = '\0';
 
-	if (m < 0)
+	if (n < 0)
 	{
-		m1 = m * -1;
+		n1 = n * -1;
 		buffer[0] = '-';
 	}
 	else
 	{
-		m1 = m;
+		n1 = n;
 	}
 
 	lenght--;
 	do {
 		*(buffer + lenght) = (n1 % 10) + '0';
-		m1 = m1 / 10;
+		n1 = n1 / 10;
 		lenght--;
 	}
-	while (m1 > 0)
+	while (n1 > 0)
 		;
 	return (buffer);
 }
@@ -98,4 +98,3 @@ int _atoi(char *s)
 	}
 	return (oi * pn);
 }
-

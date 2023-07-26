@@ -3,11 +3,10 @@
 /**
  * _strcat - concatenate two strings
  * @dest: char pointer the dest of the copied str
- * @sourc: const char pointer the source of str
- * 
+ * @src: const char pointer the source of str
  * Return: the dest
  */
-char *_str_cat(char *dest, const char *sourc)
+char *_strcat(char *dest, const char *src)
 {
 	int i;
 	int j;
@@ -15,45 +14,41 @@ char *_str_cat(char *dest, const char *sourc)
 	for (i = 0; dest[i] != '\0'; i++)
 		;
 
-	for (j = 0; sourc[j] != '\0'; j++)
+	for (j = 0; src[j] != '\0'; j++)
 	{
-		dest[i] = sourc[j];
+		dest[i] = src[j];
 		i++;
 	}
 
 	dest[i] = '\0';
 	return (dest);
 }
-
 /**
  * *_strcpy - Copies the string pointed to by src.
  * @dest: Type char pointer the dest of the copied str
- * @sourc: Type char pointer the source of str
- * 
+ * @src: Type char pointer the source of str
  * Return: the dest.
  */
-char *_strcpy(char *dest, char *sourc)
+char *_strcpy(char *dest, char *src)
 {
 
 	size_t a;
 
-	for (a = 0; sourc[a] != '\0'; a++)
+	for (a = 0; src[a] != '\0'; a++)
 	{
-		dest[a] = sourc[a];
+		dest[a] = src[a];
 	}
 	dest[a] = '\0';
 
 	return (dest);
 }
-
 /**
- * _str_cmp - Function that compares two strings.
+ * _strcmp - Function that compares two strings.
  * @s1: type str compared
  * @s2: type str compared
- *
  * Return: Always 0.
  */
-int _str_cmp(char *s1, char *s2)
+int _strcmp(char *s1, char *s2)
 {
 	int i;
 
@@ -67,13 +62,12 @@ int _str_cmp(char *s1, char *s2)
 	return (0);
 }
 /**
- * _str_chr - locates a character in a string,
+ * _strchr - locates a character in a string,
  * @s: string.
  * @c: character.
- *
  * Return: the pointer to the first occurrence of the character c.
  */
-char *_str_chr(char *s, char c)
+char *_strchr(char *s, char c)
 {
 	unsigned int i = 0;
 
@@ -85,21 +79,21 @@ char *_str_chr(char *s, char c)
 	return ('\0');
 }
 /**
- * _str_spn - gets the length of a prefix substring.
+ * _strspn - gets the length of a prefix substring.
  * @s: initial segment.
- * @accpt: accepted bytes.
+ * @accept: accepted bytes.
  * Return: the number of accepted bytes.
  */
-int _str_spn(char *s, char *accpt)
+int _strspn(char *s, char *accept)
 {
 	int i, j, bool;
 
 	for (i = 0; *(s + i) != '\0'; i++)
 	{
 		bool = 1;
-		for (j = 0; *(accpt + j) != '\0'; j++)
+		for (j = 0; *(accept + j) != '\0'; j++)
 		{
-			if (*(s + i) == *(accpt + j))
+			if (*(s + i) == *(accept + j))
 			{
 				bool = 0;
 				break;
@@ -110,4 +104,3 @@ int _str_spn(char *s, char *accpt)
 	}
 	return (i);
 }
-
