@@ -32,17 +32,6 @@ typedef struct sep_list_s
 } sep_list;
 
 /**
- * struct builtin_s - Builtin struct for command args.
- * @name: The name of the command builtin i.e cd, exit, env
- * @f: data type pointer function.
- */
-typedef struct builtin_s
-{
-	char *name;
-	int (*f)(data_shell *data_sh);
-} builtin_t;
-
-/**
  * struct r_var_list - single linked list
  * @len_var: variable length
  * @val: value of the variable
@@ -78,6 +67,17 @@ typedef struct data
 	char *input;
 	char *pro_id;
 } data_shell;
+
+/**
+ * struct builtin_s - Builtin struct for command args.
+ * @name: The name of the command builtin i.e cd, exit, env
+ * @f: data type pointer function.
+ */
+typedef struct builtin_s
+{
+        char *name;
+        int (*f)(data_shell *data_sh);
+} builtin_t;
 
 /**
  * struct line_list_s - single linked list
@@ -190,7 +190,7 @@ int _strlen(const char *s);
 char *_strdup(const char *s);
 
 /* AUXILIARY_STRNG_2.c */
-void rev_string(char *strng)
+void rev_string(char *strng);
 
 /* SPLIT.C */
 char *swap_char(char *input, int bool);
@@ -212,7 +212,7 @@ int first_char(char *input, int *i);
 int repeated_char(char *input, int i);
 
 /* get_signint.c */
-void get_sigint(int signal)
+void get_sigint(int signal);
 
 /* AUX_memory.c */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
