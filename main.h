@@ -2,7 +2,7 @@
 #define MAIN_H
 
 #include <sys/types.h>
-//#include <sys/wait.h>
+#include <sys/wait.h>
 #include <sys/stat.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -91,7 +91,7 @@ typedef struct line_list_s
 	struct line_list_s *next;
 } line_list;
 
-/* AUXILIARY_list.c */
+/* AUXILIARY_LIST.c */
 void free_sep_list(sep_list **head);
 void free_line_list(line_list **head);
 sep_list *add_sep_node_end(sep_list **head, char sep);
@@ -124,7 +124,7 @@ void cd_dot(data_shell *data_sh);
 /* COMMAND_shell.c */
 int cd_shell(data_shell *data_sh);
 
-/*  AUXILIARY_LIST_1.c */
+/* AUXILIARY_LIST_1.c */
 void free_rvar_list(r_var **head);
 r_var *add_rvar_node(r_var **head, int lvar, char *var, int lval);
 
@@ -143,7 +143,7 @@ void aux_hlp_alias(void);
 void aux_hlp_cd(void);
 void aux_hlp_env(void);
 
-/* GET_H.c */
+/* GET_HLP.c */
 int get_hlp(data_shell *data_sh);
 
 /* AUX_ERROR.c */
@@ -152,7 +152,7 @@ char *error_not_found(data_shell *data_sh);
 char *strcat_cd(data_shell *, char *, char *, char *);
 char *error_exit_shell(data_shell *data_sh);
 
-/*  AUX_ERROR_2.c */
+/* AUX_ERROR_2.c */
 char *error_syntax(char **args);
 char *error_permission(char **args);
 char *error_env(data_shell *datash);
@@ -182,12 +182,15 @@ char *_str_cat(char *dest, const char *sourc);
 char *_str_cpy(char *dest, char *sourc);
 int _str_spn(char *s, char *accpt);
 
-/* AUXILIARY_STRING_1.c */
+/* AUXILIARY_STRNG_1.c 19*/
 int cmp_chars(char str[], const char *dl_meter);
 int _isdigit(const char *s);
 char *_strtok(char str[], const char *dl_meter);
 int _strlen(const char *s);
 char *_strdup(const char *s);
+
+/* AUXILIARY_STRNG_2.c */
+void rev_string(char *strng)
 
 /* SPLIT.C */
 char *swap_char(char *input, int bool);
@@ -208,11 +211,24 @@ void print_syntax_error(data_shell *datash, char *input, int i, int bool);
 int first_char(char *input, int *i);
 int repeated_char(char *input, int i);
 
+/* get_signint.c */
+void get_sigint(int signal)
 
-/* AUX_memory.c*/
+/* AUX_memory.c */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
 void _memcpy(void *newptr, const void *ptr, unsigned int size);
 
+/* rep_var.c */
+void check_env(r_var **h, char *in, data_shell *data);
+int check_vars(r_var **h, char *in, char *sta, data_shell *data);
+char *replaced_input(r_var **head, char *input, char *new_input, int n_len);
+char *rep_var(char *input, data_shell *data_sh);
+
+/* GET_BUILTIN.c */
+int (*get_builtin(char *command))(data_shell *data_sh);
+
+/* EXIT.c*/
+int exit_shell(data_shell *data_sh);
 
 #endif
