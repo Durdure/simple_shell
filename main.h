@@ -135,7 +135,7 @@ int check_syntax_error(data_shell *datash, char *input);
 char *without_comment(char *in);
 void shell_loop(data_shell *datash);
 
-/* READ_line.c */
+/* read_line.c */
 char *read_line(int *i_eof);
 
 /* split.c */
@@ -181,16 +181,14 @@ void cd_to(data_shell *datash);
 void cd_previous(data_shell *datash);
 void cd_to_home(data_shell *datash);
 
+/* cd_shell.c */
+int cd_shell(data_shell *datash);
+
 /* get_builtin */
 int (*get_builtin(char *cmd))(data_shell *datash);
 
 /* _exit.c */
 int exit_shell(data_shell *datash);
-
-
-/* cd_shell.c */
-int cd_shell(data_shell *datash);
-
 
 /* aux_stdlib.c */
 int get_len(int n);
