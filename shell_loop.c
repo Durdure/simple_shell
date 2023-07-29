@@ -6,72 +6,51 @@
  * @in: input string
  * Return: input without comments
  */
-char *without_comment(char *in)
-{
-	int i, up_to;
+char *without_comment(char *in) {
+    char *out = malloc(strlen(in) + 1); // Allocate memory for the output string
 
-	up_to = 0;
-	for (i = 0; in[i]; i++)
-	{
-		if (in[i] == '#')
-		{
-			if (i == 0)
-			{
-				free(in);
-				return (NULL);
-			}
+    int i = 0, j = 0;
+    int isInComment = 0;
 
-			if (in[i - 1] == ' ' || in[i - 1] == '\t' || in[i - 1] == ';')
-				up_to = i;
-		}
+    while (in[i] != '\0') {
+        if (!isInComment && in[i] == '#') {
+            isInComment = 1;
+            i++;
+        }
+
+        if (!isInComment) {
+            out[j] = in[i];
+            j++;
 	}
 
-	if (up_to != 0)
-	{
-		in = _realloc(in, i, up_to + 1);
-		in[up_to] = '\0';
-	}
+        if (isInComment && in[i] == '\n') {
+            isInComment = 0;
+        }
 
-	return (in);
+        i++;
+    }
+
+    out[j] = '\0';
+    return out;
 }
 
-/**
- * shell_loop - Loop of shell
+ /**
+ * shell_loop - the main shell loop
  * @datash: data relevant (av, input, args)
  *
  * Return: no return.
  */
-void shell_loop(data_shell *datash)
-{
-	int loop, i_eof;
-	char *input;
+void shell_loop(data_shell *datash) {
+    char input[100];
 
-	loop = 1;
-	while (loop == 1)
-	{
-		write(STDIN_FILENO, "($) ", 4);
-		input = read_line(&i_eof);
-		if (i_eof != -1)
-		{
-			input = without_comment(input);
-			if (input == NULL)
-				continue;
+    while (1) {
+        printf("Shell> ");
+        fgets(input, sizeof(input), stdin);
 
-			if (check_syntax_error(datash, input) == 1)
-			{
-				datash->status = 2;
-				free(input);
-				continue;
-			}
-			input = rep_var(input, datash);
-			loop = split_commands(datash, input);
-			datash->counter += 1;
-			free(input);
-		}
-		else
-		{
-			loop = 0;
-			free(input);
-		}
-	}
+        char *clean_input = without_comment(input);
+
+        // Placeholder code for processing the cleaned input
+
+        free(clean_input);
+    }
 }
