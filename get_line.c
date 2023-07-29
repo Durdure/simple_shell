@@ -7,31 +7,15 @@
  * @n: size of line
  * @j: size of buffer
  */
-void bring_line(char **lineptr, size_t *n, char *buffer, size_t j)
-{
+void bring_line(char **lineptr, size_t *n, char *buffer, size_t j) {
+    if (*n < j + 1) {
+        *n = j + 1;
+        *lineptr = realloc(*lineptr, *n);
+    }
+    strncpy(*lineptr, buffer, j);
+    (*lineptr)[j] = '\0';
+}
 
-	if (*lineptr == NULL)
-	{
-		if  (j > BUFSIZE)
-			*n = j;
-
-		else
-			*n = BUFSIZE;
-		*lineptr = buffer;
-	}
-	else if (*n < j)
-	{
-		if (j > BUFSIZE)
-			*n = j;
-		else
-			*n = BUFSIZE;
-		*lineptr = buffer;
-	}
-	else
-	{
-		_strcpy(*lineptr, buffer);
-		free(buffer);
-	}
 }
 /**
  * get_line - Read inpt from stream
@@ -40,45 +24,32 @@ void bring_line(char **lineptr, size_t *n, char *buffer, size_t j)
  * @stream: stream to read from
  * Return: The number of bytes
  */
-ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
-{
-	int i;
-	static ssize_t input;
-	ssize_t retval;
-	char *buffer;
-	char t = 'z';
+ssize_t get_line(char **lineptr, size_t *n, FILE *stream) {
+    char buffer[256];
+    ssize_t i, j;
+    size_t len = 0;
+    
+    while (fgets(buffer, sizeof(buffer), stream) != NULL) {
+        len = strlen(buffer);
+        i = 0;
+        
+        while (i < len && (buffer[i] == ' ' || buffer[i] == '\t' || buffer[i] == '\n')) {
+            i++;
+        }
+	if (i == len) {
+            continue;  // Skip empty lines
+        }
 
-	if (input == 0)
-		fflush(stream);
-	else
-		return (-1);
-	input = 0;
+        j = len - 1;
 
-	buffer = malloc(sizeof(char) * BUFSIZE);
-	if (buffer == 0)
-		return (-1);
-	while (t != '\n')
-	{
-		i = read(STDIN_FILENO, &t, 1);
-		if (i == -1 || (i == 0 && input == 0))
-		{
-			free(buffer);
-			return (-1);
-		}
-		if (i == 0 && input != 0)
-		{
-			input++;
-			break;
-		}
-		if (input >= BUFSIZE)
-			buffer = _realloc(buffer, input, input + 1);
-		buffer[input] = t;
-		input++;
-	}
-	buffer[input] = '\0';
-	bring_line(lineptr, n, buffer, input);
-	retval = input;
-	if (i != 0)
-		input = 0;
-	return (retval);
+        while (j >= i && (buffer[j] == ' ' || buffer[j] == '\t' || buffer[j] == '\n')) {
+            j--;
+        }
+
+        bring_line(lineptr, n, buffer + i, j - i + 1);
+        return j - i + 1;
+    }
+
+    return -1;  // Return -1 to indicate end of file or error
 }
+
