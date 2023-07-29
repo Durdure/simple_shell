@@ -9,33 +9,25 @@
  * @lval: length of the value.
  * Return: address of the head.
  */
-r_var *add_rvar_node(r_var **head, int lvar, char *val, int lval)
-{
-	r_var *new, *temp;
+r_var *add_rvar_node(r_var **head, int lvar, char *var, int lval) {
+    r_var *new_node = (r_var *)malloc(sizeof(r_var));
+    new_node->lvar = lvar;
+    new_node->var = (char *)malloc((strlen(var) + 1) * sizeof(char));
+    strcpy(new_node->var, var);
+    new_node->lval = lval;
+    new_node->next = NULL;
 
-	new = malloc(sizeof(r_var));
-	if (new == NULL)
-		return (NULL);
+    if (*head == NULL) {
+        *head = new_node;
+    } else {
+        r_var *temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = new_node;
+    }
 
-	new->len_var = lvar;
-	new->val = val;
-	new->len_val = lval;
-
-	new->next = NULL;
-	temp = *head;
-
-	if (temp == NULL)
-	{
-		*head = new;
-	}
-	else
-	{
-		while (temp->next != NULL)
-			temp = temp->next;
-		temp->next = new;
-	}
-
-	return (*head);
+    return new_node;
 }
 
 /**
@@ -43,19 +35,17 @@ r_var *add_rvar_node(r_var **head, int lvar, char *val, int lval)
  * @head: head of the linked list.
  * Return: no return.
  */
-void free_rvar_list(r_var **head)
-{
-	r_var *temp;
-	r_var *curr;
+void free_rvar_list(r_var **head) {
+    r_var *current = *head;
+    r_var *next;
 
-	if (head != NULL)
-	{
-		curr = *head;
-		while ((temp = curr) != NULL)
-		{
-			curr = curr->next;
-			free(temp);
-		}
-		*head = NULL;
-	}
+    while (current != NULL) {
+        next = current->next;
+        free(current->var);
+        free(current);
+        current = next;
+    }
+
+    *head = NULL;
 }
+
